@@ -1,12 +1,15 @@
 package com.example.guowang.mto.adapter;
 
 import android.content.Context;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.bean.MenuInfoBean;
@@ -65,21 +68,43 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (isPositionHeader(position)) {
             myHeaderHolder headerHolder = (myHeaderHolder) holder;
             headerHolder.mimageView.setImageResource(R.mipmap.topinfo_ban_bg);
         } else {
             myVieHolder ItemVieHolder = (myVieHolder) holder;
-            ItemVieHolder.mTextView.setText(mlist.get(position-1).getName());
-            ItemVieHolder.mImageView.setImageResource(mlist.get(position-1).getImageId());
+            ItemVieHolder.mTextView.setText(mlist.get(position - 1).getName());
+            ItemVieHolder.mImageView.setImageResource(mlist.get(position - 1).getImageId());
+            ItemVieHolder.mRelative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (position) {
+                        case 1:
+                            Toast.makeText(mContext, "我是夜间模式", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2:
+                            Toast.makeText(mContext, "我是主题换肤", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 3:
+                            Toast.makeText(mContext, "我是定时关闭音乐", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 4:
+                            Toast.makeText(mContext, "我是下载音乐品质", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 5:
+                            Toast.makeText(mContext, "我是退出", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            });
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return mlist.size()+1;
+        return mlist.size() + 1;
     }
 
     private boolean isPositionHeader(int position) {
@@ -99,11 +124,14 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class myVieHolder extends RecyclerView.ViewHolder {
         TextView mTextView;
         ImageView mImageView;
+        RelativeLayout mRelative;
 
         public myVieHolder(View itemView) {
             super(itemView);
             mTextView = (TextView) itemView.findViewById(R.id.tv_item_menu_name);
             mImageView = (ImageView) itemView.findViewById(R.id.iv_item_menu_icon);
+            mRelative = (RelativeLayout) itemView.findViewById(R.id.RL_item_main);
+
         }
     }
 

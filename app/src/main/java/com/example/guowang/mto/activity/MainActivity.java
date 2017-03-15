@@ -1,20 +1,16 @@
 package com.example.guowang.mto.activity;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.MenuAdapter;
 import com.example.guowang.mto.bean.MenuInfoBean;
-
 import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRlvMenu;
     @Bind(R.id.activity_main)
     DrawerLayout mDwaermenu;
-
     ArrayList<MenuInfoBean> MenuInfoList;
     MenuAdapter menuAdapter;
     Context mContext;
@@ -36,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
+        initListener();
+    }
+
+    private void initListener() {
+
     }
 
 
