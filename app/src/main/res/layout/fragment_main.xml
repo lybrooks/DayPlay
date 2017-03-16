@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.guowang.mto.fragment.MainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+           <RadioGroup
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="horizontal"
+               android:layout_marginTop="10dp"
+               android:layout_marginBottom="5dp"
+               >
+        <RadioButton
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="歌曲"
+            android:textColor="@drawable/color_text"
+            android:textSize="20dp"
+            android:id="@+id/rb_music"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_musics"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="歌单"
+            android:textColor="@drawable/color_text"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/rb_top"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="排行榜"
+            android:textColor="@drawable/color_text"
+            android:textSize="20dp" />
+           </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/rb_music_line"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="#f7a009"
+            android:visibility="invisible"
+            />
+
+        <View
+            android:id="@+id/rb_musics_line"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="#f7a009"
+            android:visibility="invisible"/>
+
+        <View
+            android:id="@+id/rb_top_line"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="#f7a009"
+            android:visibility="invisible"
+            />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vp_music"
+        >
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>
