@@ -6,6 +6,7 @@
     android:id="@+id/RL_item_main"
     >
     <ImageView
+        android:layout_marginTop="20dp"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:id="@+id/iv_item_menu_icon"
@@ -13,6 +14,7 @@
        android:layout_marginLeft="25dp"
         />
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:text="夜间模式"

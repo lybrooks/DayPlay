@@ -1,6 +1,8 @@
 package com.example.guowang.mto.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.bean.MenuInfoBean;
+import com.example.guowang.mto.view.CarDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +51,20 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context mContext;
     ArrayList<MenuInfoBean> mlist;
+    DrawerLayout mDrawerLayout;
+    RecyclerView  mRecyclerView;
 
     public MenuAdapter(Context mContext, ArrayList<MenuInfoBean> list) {
         this.mContext = mContext;
         this.mlist = list;
     }
 
+    public MenuAdapter(Context mContext, ArrayList<MenuInfoBean> mlist, DrawerLayout mDrawerLayout, RecyclerView mRecyclerView) {
+        this.mContext = mContext;
+        this.mlist = mlist;
+        this.mDrawerLayout = mDrawerLayout;
+        this.mRecyclerView = mRecyclerView;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -81,9 +92,11 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 public void onClick(View v) {
                     switch (position) {
                         case 1:
-                            Toast.makeText(mContext, "我是夜间模式", Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
+                            Dialog mDialog= new CarDialog(mContext);
+                            mDialog.show();
+                            mDrawerLayout.closeDrawer(mRecyclerView);
                             Toast.makeText(mContext, "我是主题换肤", Toast.LENGTH_SHORT).show();
                             break;
                         case 3:

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
         mContext = this;
 //        mDwaermenu.setScrimColor(Color.TRANSPARENT);
-        menuAdapter = new MenuAdapter(mContext, MenuInfoList);
+        menuAdapter = new MenuAdapter(mContext, MenuInfoList,mDwaermenu,mRlvMenu);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRlvMenu.setAdapter(menuAdapter);
         mRlvMenu.setLayoutManager(manager);
