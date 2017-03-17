@@ -6,90 +6,12 @@
     android:orientation="vertical"
     tools:context="com.example.guowang.mto.fragment.MainFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-           <RadioGroup
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:orientation="horizontal"
-               android:layout_marginTop="10dp"
-               android:layout_marginBottom="5dp"
-               >
-        <RadioButton
-            android:button="@null"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="歌曲"
-            android:textColor="@drawable/color_text"
-            android:textSize="20dp"
-            android:id="@+id/rb_music"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_musics"
-            android:button="@null"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="歌单"
-            android:textColor="@drawable/color_text"
-            android:textSize="20dp" />
-
-        <RadioButton
-            android:id="@+id/rb_top"
-            android:button="@null"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="排行榜"
-            android:textColor="@drawable/color_text"
-            android:textSize="20dp" />
-           </RadioGroup>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <View
-            android:id="@+id/rb_music_line"
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="#f7a009"
-            android:visibility="visible"
-            />
-
-        <View
-            android:id="@+id/rb_musics_line"
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="#f7a009"
-            android:visibility="invisible"/>
-
-        <View
-            android:id="@+id/rb_top_line"
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="#f7a009"
-            android:visibility="invisible"
-            />
-    </LinearLayout>
     <android.support.design.widget.TabLayout
         android:id="@+id/tl_music"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorColor="#FF00FF00"
-        app:tabSelectedTextColor="#FF00FF00"
+        app:tabSelectedTextColor="#FF000000"
         app:tabTextColor="#FF000000"
         app:tabMode="scrollable"
         app:tabGravity="center"
