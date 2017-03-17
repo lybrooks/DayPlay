@@ -71,6 +71,8 @@ public class MainFragment extends Fragment {
         mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList,mTitle);
         vpMusic.setAdapter(VP_Adapter);
         tlMusic.setTabsFromPagerAdapter(VP_Adapter);
+        //noinspection WrongConstant
+        tlMusic.setTabMode(TabLayout.GRAVITY_CENTER);
         tlMusic.setupWithViewPager(vpMusic);
 
 
