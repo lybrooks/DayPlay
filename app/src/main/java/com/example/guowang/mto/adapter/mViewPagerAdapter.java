@@ -3,6 +3,7 @@ package com.example.guowang.mto.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -18,11 +19,13 @@ public class mViewPagerAdapter extends FragmentPagerAdapter {
 
     ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     FragmentManager mFragmentManager;
+    String[] mTitle =new String[]{};
 
-    public mViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> arrayList) {
+    public mViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> arrayList,String[] mTitle) {
         super(fm);
         this.fragmentArrayList = arrayList;
         this.mFragmentManager = fm;
+        this.mTitle=mTitle;
     }
 
     @Override
@@ -36,8 +39,15 @@ public class mViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public CharSequence getPageTitle(int position) {
+        return mTitle[position];
+    }
+
+
+    @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         mFragmentManager.beginTransaction().hide(fragmentArrayList.get(position));
     }
+
 
 }

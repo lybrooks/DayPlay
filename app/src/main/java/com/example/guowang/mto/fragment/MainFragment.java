@@ -2,6 +2,7 @@ package com.example.guowang.mto.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -46,12 +47,16 @@ public class MainFragment extends Fragment {
     NewMusicFragment mNewMusicFragment;
     TopsFragment mTopsFragment;
     int index;
+    @Bind(R.id.tl_music)
+    TabLayout tlMusic;
 
     public MainFragment() {
         // Required empty public constructor
     }
-    View[] mV ;
-    RadioButton mrb[] ;
+
+    View[] mV;
+    RadioButton mrb[];
+    String [] mTitle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,13 +65,19 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
         initView();
+        initListener();
         return view;
+
+    }
+
+    private void initListener() {
 
     }
 
     private void initView() {
         mV = new View[]{rbMusicLine, rbMusicsLine, rbTopLine};
-        mrb= new RadioButton[]{rbMusic, rbMusics, rbTop};
+        mrb = new RadioButton[]{rbMusic, rbMusics, rbTop};
+        mTitle = new String[]{"新曲","歌单","排行榜"};
         mMusicsFragment = new MusicsFragment();
         mNewMusicFragment = new NewMusicFragment();
         mTopsFragment = new TopsFragment();
@@ -76,8 +87,10 @@ public class MainFragment extends Fragment {
         fragmentArrayList.add(mTopsFragment);
 
         fragmentManager = getFragmentManager();
-        mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList);
+        mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList,mTitle);
         vpMusic.setAdapter(VP_Adapter);
+        tlMusic.setTabsFromPagerAdapter(VP_Adapter);
+        tlMusic.setupWithViewPager(vpMusic);
 
         vpMusic.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -160,8 +173,6 @@ public class MainFragment extends Fragment {
             }
         }
     }
-
-
 
 
 }

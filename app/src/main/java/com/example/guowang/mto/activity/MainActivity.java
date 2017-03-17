@@ -88,55 +88,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentArrayList.add(mainFragment);
         fragmentArrayList.add(localFragment);
         fragmentManager = getSupportFragmentManager();
-        mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList);
-//        vp_main.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                switch (position) {
-//                    case 0:
-//                        index = 0;
-//                        break;
-//                    case 1:
-//                        index = 1;
-//                        break;
-//                    case 2:
-//                        index = 2;
-//                        break;
-//                    case 3:
-//                        index = 3;
-//                        break;
-//
-//                }
-//                setRadioButtonStatus();
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
-
+        mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList,null);
         vp_main.setAdapter(VP_Adapter);
 
 
 
 
     }
-
-    private void setRadioButtonStatus() {
-
-    }
-
-
-
-
-
-
 
 
     @OnClick(R.id.iv_actionbar_menu)

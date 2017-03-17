@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.example.guowang.mto.fragment.MainFragment">
 
@@ -83,6 +84,22 @@
             android:visibility="invisible"
             />
     </LinearLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_music"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="#FF00FF00"
+        app:tabSelectedTextColor="#FF00FF00"
+        app:tabTextColor="#FF000000"
+        app:tabMode="scrollable"
+        app:tabGravity="center"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Large"
+        >
+
+
+
+    </android.support.design.widget.TabLayout>
+
 
     <android.support.v4.view.ViewPager
         android:layout_marginTop="5dp"
