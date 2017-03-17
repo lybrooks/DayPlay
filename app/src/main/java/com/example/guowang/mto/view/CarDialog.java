@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.utils.L;
+import com.example.guowang.mto.utils.ThemeHelper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,10 +46,9 @@ public class CarDialog extends Dialog {
     @Bind(R.id.iv_dialog_pick)
     ImageView ivDialogPick;
 
-    ImageView ArrColorImaeg[] = {ivDialogRed, ivDialogPurple, ivDialogBule, ivDialogGreen, ivDialogDGreen, ivDialogYellow,
-            ivDialogDYellow, ivDialogPick};
+    ImageView ArrColorImaeg[];
 
-
+    private int mCurrentTheme;
     public CarDialog(Context context) {
         super(context);
     }
@@ -67,6 +67,12 @@ public class CarDialog extends Dialog {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.cardialog);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
+        ArrColorImaeg = new ImageView[] {ivDialogRed, ivDialogPurple, ivDialogBule, ivDialogGreen, ivDialogDGreen, ivDialogYellow,
+                ivDialogDYellow, ivDialogPick};
     }
 
 
@@ -76,44 +82,36 @@ public class CarDialog extends Dialog {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_dialog_red:
-                ivDialogRed.setSelected(true);
-                ivDialogPurple.setSelected(false);
-                ivDialogBule.setSelected(false);
-//               setChoose(0);
+                mCurrentTheme = ThemeHelper.CARD_SAKURA;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.iv_dialog_purple:
-//               setChoose(1);
-                ivDialogPurple.setSelected(true);
-                ivDialogRed.setSelected(false);
-                ivDialogBule.setSelected(false);
-//                ivDialogPurple.setImageResource(R.drawable.ic_check_white_18dp);
+                mCurrentTheme = ThemeHelper.CARD_HOPE;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.iv_dialog_bule:
-                ivDialogBule.setSelected(true);
-                ivDialogPurple.setSelected(false);
-                ivDialogRed.setSelected(false);
-//                ivDialogBule.setImageResource(R.drawable.ic_check_white_18dp);
-                setChoose(2);
+                mCurrentTheme = ThemeHelper.CARD_STORM;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.iv_dialog_green:
-//                ivDialogGreen.setImageResource(R.drawable.ic_check_white_18dp);
-                setChoose(3);
+                mCurrentTheme = ThemeHelper.CARD_WOOD;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.iv_dialog_d_green:
-                setChoose(4);
-//                ivDialogDGreen.setImageResource(R.drawable.ic_check_white_18dp);
+                mCurrentTheme = ThemeHelper.CARD_LIGHT;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.iv_dialog_yellow:
-                setChoose(5);
-//                ivDialogYellow.setImageResource(R.drawable.ic_check_white_18dp);
+                mCurrentTheme = ThemeHelper.CARD_THUNDER;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.iv_dialog_d_yellow:
-                setChoose(6);
-//                ivDialogDYellow.setImageResource(R.drawable.ic_check_white_18dp);
+                mCurrentTheme = ThemeHelper.CARD_SAND;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.iv_dialog_pick:
-//                ivDialogPick.setImageResource(R.drawable.ic_check_white_18dp);
-                setChoose(7);
+                mCurrentTheme = ThemeHelper.CARD_FIREY;
+                setImageButtons(mCurrentTheme);
                 break;
             case R.id.tv_dialog_quxiao:
                 this.dismiss();
@@ -121,16 +119,16 @@ public class CarDialog extends Dialog {
         }
     }
 
-    private void setChoose(int j) {
-        for (int i = 0; i < 8; i++) {
-            L.e("ArrColorImaeg.length="+ArrColorImaeg.length);
-            if (i == j) {
-                ArrColorImaeg[j].setSelected(true);
-                L.e(""+ArrColorImaeg[j]);
-            } else {
-                ArrColorImaeg[j].setSelected(false);
-            }
-        }
+
+    private void setImageButtons(int currentTheme) {
+        ArrColorImaeg[0].setSelected(currentTheme == ThemeHelper.CARD_SAKURA);
+        ArrColorImaeg[1].setSelected(currentTheme == ThemeHelper.CARD_HOPE);
+        ArrColorImaeg[2].setSelected(currentTheme == ThemeHelper.CARD_STORM);
+        ArrColorImaeg[3].setSelected(currentTheme == ThemeHelper.CARD_WOOD);
+        ArrColorImaeg[4].setSelected(currentTheme == ThemeHelper.CARD_LIGHT);
+        ArrColorImaeg[5].setSelected(currentTheme == ThemeHelper.CARD_THUNDER);
+        ArrColorImaeg[6].setSelected(currentTheme == ThemeHelper.CARD_SAND);
+        ArrColorImaeg[7].setSelected(currentTheme == ThemeHelper.CARD_FIREY);
     }
 }
 

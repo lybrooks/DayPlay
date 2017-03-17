@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <View
+            android:layout_marginLeft="5dp"
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:background="#df150e" />
@@ -25,6 +26,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginLeft="3dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rlv_musics"

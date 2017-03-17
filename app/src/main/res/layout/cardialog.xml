@@ -17,17 +17,21 @@
             android:id="@+id/iv_dialog_red"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:scaleType="centerInside"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#f90617" />
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#f90617" />
+
 
         <ImageView
             android:id="@+id/iv_dialog_purple"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#9b0cd4" />
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#9b0cd4" />
 
         <ImageView
             android:id="@+id/iv_dialog_bule"
@@ -35,16 +39,18 @@
             android:layout_height="50dp"
 
             android:layout_marginLeft="10dp"
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#0742f1" />
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#0742f1" />
 
         <ImageView
             android:layout_marginLeft="10dp"
             android:id="@+id/iv_dialog_green"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#0fda34" />
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#0fda34" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,15 +67,17 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
 
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#329614" />
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#329614" />
 
         <ImageView
             android:id="@+id/iv_dialog_yellow"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#eaed04"
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#eaed04"
             android:layout_marginLeft="10dp"/>
 
         <ImageView
@@ -77,16 +85,18 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#f1a707" />
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#f1a707" />
 
         <ImageView
             android:id="@+id/iv_dialog_pick"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/actionbar_color_choose"
-            app:backgroundTint="#ef02a0" />
+            android:background="@drawable/ic_card_bigdp"
+            android:src="@drawable/selector_pick_item"
+            android:backgroundTint="#ef02a0" />
     </LinearLayout>
 
     <LinearLayout

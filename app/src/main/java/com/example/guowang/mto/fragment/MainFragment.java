@@ -71,6 +71,7 @@ public class MainFragment extends Fragment {
         mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList,mTitle);
         vpMusic.setAdapter(VP_Adapter);
         tlMusic.setTabsFromPagerAdapter(VP_Adapter);
+        //设置TabLayout的属性
         //noinspection WrongConstant
         tlMusic.setTabMode(TabLayout.GRAVITY_CENTER);
         tlMusic.setupWithViewPager(vpMusic);
