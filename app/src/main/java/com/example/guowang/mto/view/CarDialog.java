@@ -47,8 +47,11 @@ public class CarDialog extends Dialog {
     ImageView ivDialogPick;
 
     ImageView ArrColorImaeg[];
+    private ClickListener mClickListener;
+
 
     private int mCurrentTheme;
+
     public CarDialog(Context context) {
         super(context);
     }
@@ -71,7 +74,7 @@ public class CarDialog extends Dialog {
     }
 
     private void initView() {
-        ArrColorImaeg = new ImageView[] {ivDialogRed, ivDialogPurple, ivDialogBule, ivDialogGreen, ivDialogDGreen, ivDialogYellow,
+        ArrColorImaeg = new ImageView[]{ivDialogRed, ivDialogPurple, ivDialogBule, ivDialogGreen, ivDialogDGreen, ivDialogYellow,
                 ivDialogDYellow, ivDialogPick};
     }
 
@@ -116,6 +119,11 @@ public class CarDialog extends Dialog {
             case R.id.tv_dialog_quxiao:
                 this.dismiss();
                 break;
+            case R.id.tv_dialog_OK:
+                if (mClickListener != null) {
+                    mClickListener.onConfirm(mCurrentTheme);
+                }
+                break;
         }
     }
 
@@ -130,6 +138,14 @@ public class CarDialog extends Dialog {
         ArrColorImaeg[6].setSelected(currentTheme == ThemeHelper.CARD_SAND);
         ArrColorImaeg[7].setSelected(currentTheme == ThemeHelper.CARD_FIREY);
     }
+
+    public void setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
+    }
+    public interface ClickListener {
+        void onConfirm(int currentTheme);
+    }
+
 }
 
 
