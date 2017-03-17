@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.mViewPagerAdapter;
+import com.example.guowang.mto.utils.L;
 
 import java.util.ArrayList;
 
@@ -42,11 +43,15 @@ public class MainFragment extends Fragment {
     ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     FragmentManager fragmentManager;
     MusicsFragment mMusicsFragment;
+    NewMusicFragment mNewMusicFragment;
+    TopsFragment mTopsFragment;
+    int index;
 
     public MainFragment() {
         // Required empty public constructor
     }
-
+    View[] mV ;
+    RadioButton mrb[] ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,11 +65,53 @@ public class MainFragment extends Fragment {
     }
 
     private void initView() {
+        mV = new View[]{rbMusicLine, rbMusicsLine, rbTopLine};
+        mrb= new RadioButton[]{rbMusic, rbMusics, rbTop};
         mMusicsFragment = new MusicsFragment();
+        mNewMusicFragment = new NewMusicFragment();
+        mTopsFragment = new TopsFragment();
+
+        fragmentArrayList.add(mNewMusicFragment);
         fragmentArrayList.add(mMusicsFragment);
+        fragmentArrayList.add(mTopsFragment);
+
         fragmentManager = getFragmentManager();
         mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList);
         vpMusic.setAdapter(VP_Adapter);
+
+        vpMusic.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                switch (position) {
+                    case 0:
+                        index = 0;
+//                        setRbmusic();
+                        break;
+                    case 1:
+                        index = 1;
+//                        setRbmusics();
+                        break;
+                    case 2:
+                        index = 2;
+//                        setRbtop();
+                        break;
+                }
+                L.e("index=" + index);
+                setRadioButtonStatus();
+
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 
@@ -74,28 +121,47 @@ public class MainFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
+
     @OnClick({R.id.rb_music, R.id.rb_musics, R.id.rb_top})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rb_music:
-                rbMusicLine.setVisibility(View.VISIBLE);
-                rbMusicsLine.setVisibility(View.INVISIBLE);
-                rbTopLine.setVisibility(View.INVISIBLE);
+                index = 0;
                 break;
             case R.id.rb_musics:
-                rbMusicLine.setVisibility(View.INVISIBLE);
-                rbMusicsLine.setVisibility(View.VISIBLE);
-                rbTopLine.setVisibility(View.INVISIBLE);
+                index = 1;
                 break;
             case R.id.rb_top:
-                rbMusicLine.setVisibility(View.INVISIBLE);
-                rbMusicsLine.setVisibility(View.INVISIBLE);
-                rbTopLine.setVisibility(View.VISIBLE);
+                index = 2;
                 break;
-
         }
+        setViewPage();
+
 
     }
+
+
+    private void setRadioButtonStatus() {
+        for (int i = 0; i < mV.length; i++) {
+            if (i != index) {
+                rbMusic.setChecked(false);
+                mV[i].setVisibility(View.INVISIBLE);
+            } else {
+                mrb[i].setChecked(true);
+                mV[i].setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    private void setViewPage() {
+        for (int i = 0; i < mV.length; i++) {
+            if (i == index) {
+                vpMusic.setCurrentItem(i);
+            }
+        }
+    }
+
+
 
 
 }

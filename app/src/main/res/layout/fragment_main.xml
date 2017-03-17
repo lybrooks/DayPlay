@@ -63,7 +63,7 @@
             android:layout_height="2dp"
             android:layout_weight="1"
             android:background="#f7a009"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
 
         <View

@@ -18,7 +18,9 @@ import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.MenuAdapter;
 import com.example.guowang.mto.adapter.mViewPagerAdapter;
 import com.example.guowang.mto.bean.MenuInfoBean;
+import com.example.guowang.mto.fragment.LocalFragment;
 import com.example.guowang.mto.fragment.MainFragment;
+import com.example.guowang.mto.fragment.MusicsFragment;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     MainFragment mainFragment;
+    LocalFragment localFragment;
     FragmentManager fragmentManager;
 
     @Override
@@ -81,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
         mRlvMenu.setLayoutManager(manager);
 
         mainFragment = new MainFragment();
+        localFragment = new LocalFragment();
         fragmentArrayList.add(mainFragment);
+        fragmentArrayList.add(localFragment);
         fragmentManager = getSupportFragmentManager();
         mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList);
 //        vp_main.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
