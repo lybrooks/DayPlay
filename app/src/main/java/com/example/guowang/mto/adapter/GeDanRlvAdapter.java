@@ -37,6 +37,7 @@ public class GeDanRlvAdapter extends RecyclerView.Adapter {
     public int TYPE_ITEM = 0;
     public int TYPE_FOOTER = 1;
 
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());

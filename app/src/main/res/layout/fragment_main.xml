@@ -14,7 +14,6 @@
         app:tabSelectedTextColor="#FF000000"
         app:tabTextColor="#FF000000"
         app:tabMode="scrollable"
-        app:tabTextAppearance="@style/TextAppearance.AppCompat.Large"
         >
 
 

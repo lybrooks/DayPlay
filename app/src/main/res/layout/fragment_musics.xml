@@ -11,9 +11,9 @@
         android:layout_height="wrap_content">
 
         <View
-            android:layout_marginLeft="5dp"
             android:layout_width="2dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:background="#df150e" />
 
         <TextView
@@ -22,14 +22,14 @@
             android:layout_marginLeft="5dp"
             android:text="全部歌单"
             android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginLeft="3dp"
+        android:id="@+id/rlv_musics"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rlv_musics"
-        />
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp" />
 
 </LinearLayout>

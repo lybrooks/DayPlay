@@ -50,8 +50,28 @@ public class MusicsFragment extends Fragment {
         mContext = getContext();
         mGedanAdapter = new GeDanRlvAdapter(mContext, mGeDanlist);
         GridLayoutManager manager = new GridLayoutManager(mContext,2);
+        //当加载数据的时候，foot这是为占两列
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == mGedanAdapter.getItemCount() - 1 ? 2 : 1;
+            }
+        });
         mRlvMusics.setLayoutManager(manager);
         mRlvMusics.setAdapter(mGedanAdapter);
+
+        mRlvMusics.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) { 
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
         LoadData();
 
     }
