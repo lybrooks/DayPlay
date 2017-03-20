@@ -1,5 +1,6 @@
 package com.example.guowang.mto.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @date:
  * @Copyright: www.tydic.com Inc. All rights reserved.
  */
-public class GedanInfoBean {
+public class GedanInfoBean implements Serializable {
 
     /**
      * listid : 365142031

@@ -13,6 +13,7 @@ import com.example.guowang.mto.bean.GedanInfoBean;
 import com.example.guowang.mto.utils.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName:
@@ -49,13 +50,13 @@ public class GeDanRlvAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
             GedanInfoBean infoBean = mlist.get(position);
-            ((ItemViewHolder) holder).mTvDic.setText(infoBean.getDesc());
+            ((ItemViewHolder) holder).mTvDic.setText(infoBean.getTitle());
             int count = Integer.parseInt(infoBean.getListenum());
             if (count > 10000) {
                 count = count / 10000;
-                ((ItemViewHolder) holder).mTvCount.append(" " + count + "万");
+                ((ItemViewHolder) holder).mTvCount.setText(" " + count + "万");
             } else {
-                ((ItemViewHolder) holder).mTvCount.append(" " + infoBean.getListenum());
+                ((ItemViewHolder) holder).mTvCount.setText(" " + infoBean.getListenum());
             }
             ImageLoader.downloadImg(mContext, ((ItemViewHolder) holder).mIvPic, infoBean.getPic_300());
         }
@@ -77,6 +78,11 @@ public class GeDanRlvAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public void upadte(List<GedanInfoBean> list) {
+        this.mlist.addAll(list);
+        notifyDataSetChanged();
+    }
+
     class FooterViewHolder extends RecyclerView.ViewHolder {
         public FooterViewHolder(View itemView) {
             super(itemView);
@@ -91,7 +97,7 @@ public class GeDanRlvAdapter extends RecyclerView.Adapter {
             super(itemView);
             mTvCount = (TextView) itemView.findViewById(R.id.iv_item_count);
             mTvDic = (TextView) itemView.findViewById(R.id.tv_item_dic);
-            mIvPic = (ImageView) itemView.findViewById(R.id.iv_dialog_pick);
+            mIvPic = (ImageView) itemView.findViewById(R.id.iv_item_pic);
         }
     }
 

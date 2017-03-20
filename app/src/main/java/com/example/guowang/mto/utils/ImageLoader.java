@@ -8,9 +8,13 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.guowang.mto.R;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -18,7 +22,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class ImageLoader {   private static final String UTF_8 = "utf-8";
+public class ImageLoader {
+    private static final String UTF_8 = "utf-8";
     private static final int DOWNLOAD_SUCCESS = 0;
     private static final int DOWNLOAD_ERROR = 1;
 
@@ -356,22 +361,39 @@ public class ImageLoader {   private static final String UTF_8 = "utf-8";
     }
 
     public static void downloadImg(Context context, ImageView imageView, String thumb) {
-        setImage( thumb, context, imageView, true);
+        setImage(thumb, context, imageView, true);
     }
 
-
+   /* public static void downloadImg(Context context, ImageView imageView, String thumb, boolean isDragging) {
+        setImage(I.DOWNLOAD_IMG_URL + thumb, context, imageView, isDragging);
+    }*/
 
     public static void setImage(String url, Context context, ImageView imageView, boolean isDragging) {
         ImageLoader.build(url)
-//                .defaultPicture(R.drawable.nopic)
+                .defaultPicture(R.drawable.actionbar_music_prs)
                 .imageView(imageView)
                 .setDragging(isDragging)
                 .showImage(context);
     }
 
 
+    // http://101.251.196.90:8000/FuLiCenterServerV2.0/downloadAvatar?name_or_hxid=a952700&avatarType=user_avatar&m_avatar_suffix=.jpg&width=200&height=200
+/*    public static String getAcatarUrl(UserBean userBean) {
+        if (userBean != null) {
+            String url = I.DOWNLOAD_ACATAR_URL + I.NAME_OR_HXID + "=" +
+                    userBean.getMuserName() + I.AND + I.AVATAR_TYPE + "="
+                    + userBean.getMavatarPath() + I.AND + I.AVATAR_SUFFIX +
+                    "=" + userBean.getMavatarSuffix() + I.AND + "width=200&height=200" + I.AND + userBean.getMavatarLastUpdateTime();
+            return url;
+        }
+        return null;
+    }*/
 
+ /*   public static void setAcatar(String url, Context context, ImageView imageView) {
+        ImageLoader.build(url)
+                .defaultPicture(R.drawable.contactlogo)
+                .imageView(imageView)
+                .showImage(context);
 
-
-
+    }*/
 }

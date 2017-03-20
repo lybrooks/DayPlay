@@ -1,5 +1,7 @@
 package com.example.guowang.mto.bean;
 
+import java.io.Serializable;
+
 /**
  * @ClassName:
  * @Description:(这里用一句话描述这个类的作用)
@@ -7,7 +9,7 @@ package com.example.guowang.mto.bean;
  * @date:
  * @Copyright: www.tydic.com Inc. All rights reserved.
  */
-public class MusicInfoBean {
+public class MusicInfoBean implements Serializable {
 
 
     /**

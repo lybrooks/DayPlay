@@ -9,37 +9,36 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.GeDanRlvAdapter;
+import com.example.guowang.mto.bean.GeDanBean;
 import com.example.guowang.mto.bean.GedanInfoBean;
+import com.example.guowang.mto.utils.L;
+import com.example.guowang.mto.utils.OkHttpUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MusicsFragment extends Fragment {
 
 
     @Bind(R.id.rlv_musics)
     RecyclerView mRlvMusics;
 
+    GeDanRlvAdapter mGedanAdapter;
     private ArrayList<GedanInfoBean> mGeDanlist;
     Context mContext;
 
     public MusicsFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_musics, container, false);
         ButterKnife.bind(this, view);
         iniView();
@@ -49,12 +48,33 @@ public class MusicsFragment extends Fragment {
     private void iniView() {
         mGeDanlist = new ArrayList<>();
         mContext = getContext();
-
-        GeDanRlvAdapter mGedanAdapter = new GeDanRlvAdapter(mContext, mGeDanlist);
+        mGedanAdapter = new GeDanRlvAdapter(mContext, mGeDanlist);
         GridLayoutManager manager = new GridLayoutManager(mContext,2);
         mRlvMusics.setLayoutManager(manager);
         mRlvMusics.setAdapter(mGedanAdapter);
+        LoadData();
 
+    }
+
+    private void LoadData() {
+        OkHttpUtils<GeDanBean> utils = new OkHttpUtils<>(mContext);
+        utils.setRequestUrl("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json&method=baidu.ting.diy.gedan&page_size=1&page_no=10")
+                .targetClass(GeDanBean.class)
+                .execute(new OkHttpUtils.OnCompleteListener<GeDanBean>() {
+                    @Override
+                    public void onSuccess(GeDanBean result) {
+                        List<GedanInfoBean> list = result.getContent();
+                        for (GedanInfoBean bean:list){
+                            mGedanAdapter.upadte(list);
+                            L.e(bean.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
     }
 
     @Override

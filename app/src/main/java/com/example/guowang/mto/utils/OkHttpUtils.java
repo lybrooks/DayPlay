@@ -3,6 +3,8 @@ package com.example.guowang.mto.utils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+
+import com.example.guowang.mto.bean.Result;
 import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -76,6 +78,7 @@ public class OkHttpUtils<T> {
                 }
             }
         }
+        initHandler();
     }
 
     /**
@@ -133,8 +136,22 @@ public class OkHttpUtils<T> {
     }
 
 
-
-
+    private void initHandler() {
+        mHandler = new Handler(MtoAplication.getInstance().getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case RESULT_ERROR:
+                        mListener.onError(msg.obj==null?msg.toString():msg.obj.toString());
+                        break;
+                    case RESULT_SUCCESS:
+                        T result = (T) msg.obj;
+                        mListener.onSuccess(result);
+                        break;
+                }
+            }
+        };
+    }
 
     /**
      * 用post请求，添加一个文件
@@ -193,7 +210,7 @@ public class OkHttpUtils<T> {
 
     public OkHttpUtils<T> setRequestUrl(String request) {
         //http://120.26.242.249:8080/SuperWeChatServerV2.0/register?m_user_name=aaaaaa&m_user_nick=aaaaaa&m_user_password=aaaaaa
-       // mUrl = new StringBuilder(I.SERVER_ROOT);
+        mUrl = new StringBuilder();
         mUrl.append(request);
 //        Log.e("okhttp","1 murl="+ mUrl.toString());
         return this;
@@ -396,14 +413,14 @@ public class OkHttpUtils<T> {
      * @param <T>
      * @return
      */
-//    public <T> T parseJson(Result result, Class<?> clazz) {
-//        if (result.getRetCode() == 0) {
-//            String json = result.getRetData().toString();
-//            T t = parseJson(json, clazz);
-//            return t;
-//        }
-//        return null;
-//    }
+    public <T> T parseJson(Result result, Class<?> clazz) {
+        if (result.getRetCode() == 0) {
+            String json = result.getRetData().toString();
+            T t = parseJson(json, clazz);
+            return t;
+        }
+        return null;
+    }
 
     /**
      * 下载文件，支持更新下载进度
@@ -455,5 +472,4 @@ public class OkHttpUtils<T> {
             mOkHttpClient=null;
         }
     }
-
 }

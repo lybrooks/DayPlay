@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="150dp"
-    android:layout_height="190dp"
-    >
+    android:layout_height="190dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true">
+    <RelativeLayout
+        android:id="@+id/rl_gedan"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+
 
         <ImageView
+            android:id="@+id/iv_item_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/music_player" />
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="23万"
-            android:id="@+id/iv_item_count"
-            />
-    </LinearLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:id="@+id/iv_item_pic"
-        />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/music_player" />
+
+            <TextView
+                android:id="@+id/iv_item_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="23万"
+                android:textColor="#fffefe" />
+        </LinearLayout>
+    </RelativeLayout>
+
     <TextView
+        android:id="@+id/tv_item_dic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_item_pic"
-        android:id="@+id/tv_item_dic"
+        android:layout_below="@id/rl_gedan"
         android:text="asadasdasd"
-        android:textSize="15dp"
-        />
+        android:textSize="15dp" />
+
 </RelativeLayout>
