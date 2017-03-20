@@ -2,16 +2,9 @@ package com.example.guowang.mto.view;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.Toast;
-
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.utils.L;
 import com.example.guowang.mto.utils.ThemeHelper;
