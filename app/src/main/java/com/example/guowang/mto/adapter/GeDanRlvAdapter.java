@@ -3,7 +3,6 @@ package com.example.guowang.mto.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.guowang.mto.PlaylistActicity;
+import com.example.guowang.mto.activity.PlaylistActicity;
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.bean.GedanInfoBean;
-import com.example.guowang.mto.utils.ImageLoader;
-import com.example.guowang.mto.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
