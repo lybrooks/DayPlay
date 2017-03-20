@@ -3,6 +3,7 @@
     package="com.example.guowang.mto">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".utils.MtoAplication"
         android:allowBackup="true"
@@ -17,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PlaylistActicity"></activity>
     </application>
 
 </manifest>

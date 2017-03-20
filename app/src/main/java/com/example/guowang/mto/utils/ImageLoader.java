@@ -364,9 +364,7 @@ public class ImageLoader {
         setImage(thumb, context, imageView, true);
     }
 
-   /* public static void downloadImg(Context context, ImageView imageView, String thumb, boolean isDragging) {
-        setImage(I.DOWNLOAD_IMG_URL + thumb, context, imageView, isDragging);
-    }*/
+
 
     public static void setImage(String url, Context context, ImageView imageView, boolean isDragging) {
         ImageLoader.build(url)
@@ -377,23 +375,4 @@ public class ImageLoader {
     }
 
 
-    // http://101.251.196.90:8000/FuLiCenterServerV2.0/downloadAvatar?name_or_hxid=a952700&avatarType=user_avatar&m_avatar_suffix=.jpg&width=200&height=200
-/*    public static String getAcatarUrl(UserBean userBean) {
-        if (userBean != null) {
-            String url = I.DOWNLOAD_ACATAR_URL + I.NAME_OR_HXID + "=" +
-                    userBean.getMuserName() + I.AND + I.AVATAR_TYPE + "="
-                    + userBean.getMavatarPath() + I.AND + I.AVATAR_SUFFIX +
-                    "=" + userBean.getMavatarSuffix() + I.AND + "width=200&height=200" + I.AND + userBean.getMavatarLastUpdateTime();
-            return url;
-        }
-        return null;
-    }*/
-
- /*   public static void setAcatar(String url, Context context, ImageView imageView) {
-        ImageLoader.build(url)
-                .defaultPicture(R.drawable.contactlogo)
-                .imageView(imageView)
-                .showImage(context);
-
-    }*/
 }
