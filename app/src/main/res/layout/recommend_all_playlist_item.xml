@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_gedan"
         android:text="asadasdasd"
-        android:textSize="15dp" />
+        android:textSize="10dp"
+        />
 
 </RelativeLayout>

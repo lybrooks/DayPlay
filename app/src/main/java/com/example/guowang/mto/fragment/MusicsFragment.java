@@ -58,7 +58,9 @@ public class MusicsFragment extends Fragment {
 
     private void LoadData() {
         OkHttpUtils<GeDanBean> utils = new OkHttpUtils<>(mContext);
-        utils.setRequestUrl("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json&method=baidu.ting.diy.gedan&page_size=1&page_no=10")
+        utils.setRequestUrl("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json&method=baidu.ting.diy.gedan")
+                .addParam("page_size","10")
+                .addParam("age_no","10")
                 .targetClass(GeDanBean.class)
                 .execute(new OkHttpUtils.OnCompleteListener<GeDanBean>() {
                     @Override

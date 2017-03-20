@@ -1,6 +1,8 @@
 package com.example.guowang.mto.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +62,17 @@ public class GeDanRlvAdapter extends RecyclerView.Adapter {
             }
             ImageLoader.downloadImg(mContext, ((ItemViewHolder) holder).mIvPic, infoBean.getPic_300());
         }
+        if (holder instanceof FooterViewHolder) {
+          ((FooterViewHolder) holder).mIvFooter.setBackgroundResource(R.drawable.list_loading);
+            final AnimationDrawable background = (AnimationDrawable) ((FooterViewHolder) holder).mIvFooter.getBackground();
+            ((FooterViewHolder) holder).mIvFooter.post(new Runnable() {
+                @Override
+                public void run() {
+                    background.start();
+                }
+            });
+
+        }
 
 
     }
@@ -84,8 +97,11 @@ public class GeDanRlvAdapter extends RecyclerView.Adapter {
     }
 
     class FooterViewHolder extends RecyclerView.ViewHolder {
+        ImageView mIvFooter;
+
         public FooterViewHolder(View itemView) {
             super(itemView);
+            mIvFooter = (ImageView) itemView.findViewById(R.id.iv_footer_pic);
         }
     }
 
