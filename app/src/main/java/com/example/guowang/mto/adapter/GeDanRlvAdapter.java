@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.guowang.mto.activity.PlaylistActicity;
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.bean.GedanInfoBean;
+import com.example.guowang.mto.utils.MFGT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,14 +78,16 @@ public class GeDanRlvAdapter extends RecyclerView.Adapter {
             ((ItemViewHolder) holder).mIvPic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, PlaylistActicity.class);
+                    //跳转到歌单详情
+                    MFGT.goPlaylistActicity(mContext,infoBean);
+                 /*   Intent intent = new Intent(mContext, PlaylistActicity.class);
                     intent.putExtra("playlistid", infoBean.getListid());
                     intent.putExtra("islocal", false);
                     intent.putExtra("albumart", infoBean.getPic_300());
                     intent.putExtra("playlistname", infoBean.getTitle());
                     intent.putExtra("playlistDetail", infoBean.getTag());
                     intent.putExtra("playlistcount", infoBean.getListenum());
-                    mContext.startActivity(intent);
+                    mContext.startActivity(intent);*/
                 }
             });
 

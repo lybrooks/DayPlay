@@ -6,7 +6,27 @@
     android:layout_height="match_parent"
     tools:context="com.example.guowang.mto.activity.PlaylistActicity">
 
-    <include layout="@layout/activity_title" />
+    <include
+        android:id="@+id/activity_title_top"
+        layout="@layout/activity_title" />
 
-    <include layout="@layout/recycler_header" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_music"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/gedan_title">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <include
+        android:id="@+id/gedan_title"
+        layout="@layout/recycler_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_title_top"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

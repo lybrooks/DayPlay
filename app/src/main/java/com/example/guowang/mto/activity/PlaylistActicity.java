@@ -1,4 +1,6 @@
 package com.example.guowang.mto.activity;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.example.guowang.mto.R;
+import com.example.guowang.mto.bean.GeDanDetailBean;
+import com.example.guowang.mto.bean.SongBean;
+import com.example.guowang.mto.utils.L;
+import com.example.guowang.mto.utils.OkHttpUtils;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -14,6 +25,12 @@ public class PlaylistActicity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
+    @Bind(R.id.iv_item_pic)
+    ImageView ivItemPic;
+    @Bind(R.id.iv_item_count)
+    TextView ivItemCount;
+    @Bind(R.id.tv_item_dic)
+    TextView mTitle;
 
     private ActionBar actionBar;
     private boolean isLocalPlaylist;
@@ -21,11 +38,15 @@ public class PlaylistActicity extends AppCompatActivity {
     private int mStatusSize;
 
     private String albumPath, playlistName, playlistDetail;
+
+    Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
         ButterKnife.bind(this);
+        mContext  = this;
         initView();
     }
 
@@ -45,6 +66,43 @@ public class PlaylistActicity extends AppCompatActivity {
         if (!isLocalPlaylist) {
             mToolbar.setSubtitle(playlistDetail);
         }
+
+
+        String playlistid = getIntent().getStringExtra("playlistid");
+        final String playlistcount = getIntent().getStringExtra("playlistcount");
+        OkHttpUtils<GeDanDetailBean> util = new OkHttpUtils<>(this);
+        util.setRequestUrl("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json&method=baidu.ting.diy.gedanInfo")
+                .addParam("listid", playlistid)
+                .targetClass(GeDanDetailBean.class)
+                .execute(new OkHttpUtils.OnCompleteListener<GeDanDetailBean>() {
+                    @Override
+                    public void onSuccess(GeDanDetailBean result) {
+                        if(result!=null){
+                            //设置图片
+                            Glide.with(mContext).load(result.getPic_300()).into(ivItemPic);
+                            //设置收听量
+                            int count = Integer.parseInt(playlistcount);
+                            if (count > 10000) {
+                                count = count / 10000;
+                                ivItemCount.setText(" " + count + "万");
+                            } else {
+                                ivItemCount.setText(" " + playlistcount);
+                            }
+                            //设置title
+                            mTitle.setText(result.getTitle());
+                            L.e("GeDanDetailBean" + result.toString());
+                        }
+
+                        for (SongBean sb : result.getContent()) {
+                            L.e("SongBean=" + sb.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
     }
 
     @Override
