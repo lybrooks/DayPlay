@@ -37,7 +37,7 @@ public class MusicsFragment extends Fragment {
     GridLayoutManager manager;
 
     final static int ActionDownLoad = 1;
-    int Pagesize = 1;
+    int Pagesize = 5;
 
     public MusicsFragment() {
     }

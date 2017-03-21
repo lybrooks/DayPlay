@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_playlist"
+    android:id="@+id/activity_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.guowang.mto.activity.PlaylistActicity">
+    android:background="@drawable/login_bg"
+    tools:context="com.example.guowang.mto.activity.SplashActivity">
 
-    <include layout="@layout/activity_title" />
-
-    <include layout="@layout/recycler_header" />
 </RelativeLayout>

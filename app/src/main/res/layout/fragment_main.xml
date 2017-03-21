@@ -10,9 +10,9 @@
         android:id="@+id/tl_music"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="#FF00FF00"
-        app:tabSelectedTextColor="#FF000000"
-        app:tabTextColor="#FF000000"
+        app:tabIndicatorColor="#f20c04"
+        app:tabSelectedTextColor="#ed0707"
+        app:tabTextColor="#ccc2c2"
         app:tabMode="scrollable"
         >
 

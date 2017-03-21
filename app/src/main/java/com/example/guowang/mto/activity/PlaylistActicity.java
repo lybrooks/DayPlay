@@ -1,13 +1,12 @@
 package com.example.guowang.mto.activity;
-
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
-
 import com.example.guowang.mto.R;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -46,5 +45,13 @@ public class PlaylistActicity extends AppCompatActivity {
         if (!isLocalPlaylist) {
             mToolbar.setSubtitle(playlistDetail);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.playlit_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
