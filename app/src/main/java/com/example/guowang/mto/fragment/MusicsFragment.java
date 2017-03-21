@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.GeDanRlvAdapter;
 import com.example.guowang.mto.bean.GeDanBean;
+import com.example.guowang.mto.bean.GeDanDetailBean;
 import com.example.guowang.mto.bean.GedanInfoBean;
+import com.example.guowang.mto.net.DownLoadData;
 import com.example.guowang.mto.utils.L;
 import com.example.guowang.mto.utils.OkHttpUtils;
 
@@ -96,31 +98,23 @@ public class MusicsFragment extends Fragment {
     }
 
     private void LoadData(final int action, int Pagesize) {
-        OkHttpUtils<GeDanBean> utils = new OkHttpUtils<>(mContext);
-        utils.setRequestUrl("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json&method=baidu.ting.diy.gedan")
-                .addParam("page_size", Pagesize + "")
-                .addParam("age_no", "10")
-                .targetClass(GeDanBean.class)
-                .execute(new OkHttpUtils.OnCompleteListener<GeDanBean>() {
-                    @Override
-                    public void onSuccess(GeDanBean result) {
-                        if (result != null && result.getContent() != null) {
-                            List<GedanInfoBean> list = result.getContent();
-                            switch (action) {
-                                case ActionDownLoad:
-                                    mGedanAdapter.upadte(list);
-                                    break;
-                            }
-
-                        }
-
+        DownLoadData.LoadGeDan(mContext, Pagesize, new OkHttpUtils.OnCompleteListener<GeDanBean>() {
+            @Override
+            public void onSuccess(GeDanBean result) {
+                if (result != null && result.getContent() != null) {
+                    List<GedanInfoBean> list = result.getContent();
+                    switch (action) {
+                        case ActionDownLoad:
+                            mGedanAdapter.upadte(list);
+                            break;
                     }
+                }
+            }
+            @Override
+            public void onError(String error) {
 
-                    @Override
-                    public void onError(String error) {
-
-                    }
-                });
+            }
+        });
     }
 
     @Override
