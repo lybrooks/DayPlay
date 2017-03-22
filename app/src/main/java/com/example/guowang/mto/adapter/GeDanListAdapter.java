@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.bean.GeDanDetailBean;
 import com.example.guowang.mto.bean.SongBean;
+import com.example.guowang.mto.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,11 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
     int Type_Title = 0;
     int Type_Item = 1;
 
+    boolean isPlaying = false;
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         if (viewType == Type_Title) {
             return new CommonItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gedan_playmenu, parent, false));
         } else {
@@ -61,13 +65,20 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        L.e("sise" + mList.size());
         if (holder instanceof SongViewHolder) {
             SongBean songBean = mList.get(position - 1);
-            ((SongViewHolder) holder).tvSongNum.setText(position+"");
+
             ((SongViewHolder) holder).tvSongName.setText(songBean.getTitle());
             ((SongViewHolder) holder).tvArtist.setText(songBean.getAuthor());
-        }else if(holder instanceof CommonItemViewHolder){
-            ((CommonItemViewHolder) holder).tvAllNumber.setText("共"+mList.size()+"首");
+            if (!isPlaying) {
+                ((SongViewHolder) holder).tvSongNum.setText(position + "");
+            } else {
+                ((SongViewHolder) holder).ivPayer.setVisibility(View.VISIBLE);
+                ((SongViewHolder) holder).tvSongNum.setVisibility(View.INVISIBLE);
+            }
+        } else if (holder instanceof CommonItemViewHolder) {
+            ((CommonItemViewHolder) holder).tvAllNumber.setText("(共" + mList.size() + "首)");
         }
     }
 
@@ -80,6 +91,12 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         return position == Type_Title ? Type_Title : Type_Item;
 
+    }
+
+    public void update(ArrayList<SongBean> content) {
+        this.mList.clear();
+        this.mList.addAll(content);
+        notifyDataSetChanged();
     }
 
     class CommonItemViewHolder extends RecyclerView.ViewHolder {
@@ -107,6 +124,7 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
             tvArtist = (TextView) itemView.findViewById(R.id.song_artist);
             ivPayer = (ImageView) itemView.findViewById(R.id.play_state);
             ivMenu = (ImageView) itemView.findViewById(R.id.popup_menu);
+
         }
     }
 }

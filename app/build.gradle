@@ -34,4 +34,8 @@ dependencies {
     compile files('libs/okio-1.9.0.jar')
     compile files('libs/gson-2.2.4.jar')
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
+    compile files('libs/YoumiSdk_v7.0.0_2017-01-06.jar')
 }

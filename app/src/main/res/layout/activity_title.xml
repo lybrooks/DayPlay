@@ -5,13 +5,13 @@
     android:id="@+id/activity_playlist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#e1d9d9"
     tools:context="com.example.guowang.mto.activity.PlaylistActicity">
 
     <android.support.v7.widget.Toolbar
+        android:theme="@style/Theme.AppCompat"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:subtitleTextAppearance="@style/Toolbar.SubTitle"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+        android:layout_height="wrap_content" />
 </LinearLayout>

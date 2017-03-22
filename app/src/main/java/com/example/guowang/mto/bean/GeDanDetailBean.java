@@ -1,5 +1,6 @@
 package com.example.guowang.mto.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public class GeDanDetailBean {
     private String tag;
     private String desc;
     private String url;
-    private List<SongBean> content;
+    private ArrayList<SongBean> content;
 
     public int getError_code() {
         return error_code;
@@ -147,11 +148,11 @@ public class GeDanDetailBean {
         this.url = url;
     }
 
-    public List<SongBean> getContent() {
+    public ArrayList<SongBean> getContent() {
         return content;
     }
 
-    public void setContent(List<SongBean> content) {
+    public void setContent(ArrayList<SongBean> content) {
         this.content = content;
     }
 
