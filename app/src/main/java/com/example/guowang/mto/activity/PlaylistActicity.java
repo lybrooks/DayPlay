@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -65,8 +67,12 @@ public class PlaylistActicity extends AppCompatActivity {
     ScrollView mScrollView;
     LinearLayout ml;
 
-    int height;
+    private int height;
+    private String Name;
+    private String tag;
+    private String desc;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,46 +83,34 @@ public class PlaylistActicity extends AppCompatActivity {
         setListener();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void setListener() {
 
-        mrlv.setOnTouchListener(new View.OnTouchListener() {
+        mScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int scrollY = mScrollView.getScrollY();
-                if (mScrollView.getScrollY() <= ml.getHeight()) {
-                    L.e("height=" + ml.getHeight() + ",scrollY="+scrollY);
-                    return false;
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > 0) {
+                    actionBar.setTitle(Name);
+                    actionBar.setSubtitle(desc);
+                } else {
+                    actionBar.setTitle("歌单");
+                    actionBar.setSubtitle(tag);
                 }
-                return false;
             }
         });
 
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-      /*  int scrollY = mScrollView.getScrollY();
-        L.e("height=" + height + ",scrollY="+scrollY);
-        switch (event.getAction()){
-            case MotionEvent.ACTION_UP:
-                scrollY = mScrollView.getScrollY();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                scrollY = mScrollView.getScrollY();
-                break;
-        }*/
-        return super.onTouchEvent(event);
-    }
 
     private void initView() {
         mScrollView = (ScrollView) findViewById(R.id.slv);
         ml = (LinearLayout) findViewById(R.id.LL_m);
         height = ml.getHeight();
-        initToolBar();
         mlist = new ArrayList<>();
         String playlistid = getIntent().getStringExtra("playlistid");
         final String playlistcount = getIntent().getStringExtra("playlistcount");
         LoadData(playlistid, playlistcount);
+        initToolBar();
         manager = new MyLinearLayoutManager(this);
         mAdapter = new GeDanListAdapter(this, mlist);
         mrlv.setLayoutManager(manager);
@@ -131,6 +125,8 @@ public class PlaylistActicity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.actionbar_back);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("歌单");
+        desc = getIntent().getStringExtra("playlistDetail");
+
         mToolbar.getBackground().setAlpha(100);
         mToolbar.setPadding(0, mStatusSize, 0, 0);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -140,7 +136,7 @@ public class PlaylistActicity extends AppCompatActivity {
             }
         });
         if (!isLocalPlaylist) {
-            mToolbar.setSubtitle(playlistDetail);
+            mToolbar.setSubtitle(desc);
         }
     }
 
@@ -160,6 +156,9 @@ public class PlaylistActicity extends AppCompatActivity {
                         ivItemCount.setText(" " + playlistcount);
                     }
                     //设置title
+                    desc = result.getDesc();
+                    tag = result.getTag();
+                    Name = result.getTitle();
                     mTitle.setText(result.getTitle());
                 }
                 mAdapter.update(result.getContent());
@@ -175,9 +174,6 @@ public class PlaylistActicity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 
     @Override
