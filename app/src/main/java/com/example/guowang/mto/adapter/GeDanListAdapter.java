@@ -65,7 +65,6 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        L.e("sise" + mList.size());
         if (holder instanceof SongViewHolder) {
             SongBean songBean = mList.get(position - 1);
 

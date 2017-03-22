@@ -4,12 +4,17 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,27 +22,38 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.disklrucache.DiskLruCache;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.GeDanListAdapter;
 import com.example.guowang.mto.bean.GeDanDetailBean;
 import com.example.guowang.mto.bean.SongBean;
 import com.example.guowang.mto.manager.MyLinearLayoutManager;
 import com.example.guowang.mto.net.DownLoadData;
+import com.example.guowang.mto.utils.ColorCaptureUtil;
+import com.example.guowang.mto.utils.ImageUtils;
 import com.example.guowang.mto.utils.L;
 import com.example.guowang.mto.utils.OkHttpUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static android.R.attr.width;
 
 public class PlaylistActicity extends AppCompatActivity {
 
@@ -66,11 +82,13 @@ public class PlaylistActicity extends AppCompatActivity {
     GeDanListAdapter mAdapter;
     ScrollView mScrollView;
     LinearLayout ml;
+    ImageView mImageView;
 
     private int height;
     private String Name;
     private String tag;
     private String desc;
+    private int scrool;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -81,6 +99,8 @@ public class PlaylistActicity extends AppCompatActivity {
         mContext = this;
         initView();
         setListener();
+        initColor();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -90,8 +110,13 @@ public class PlaylistActicity extends AppCompatActivity {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY > 0) {
+                    scrool = scrollY;
                     actionBar.setTitle(Name);
                     actionBar.setSubtitle(desc);
+                    mToolbar.getBackground().setAlpha(100);
+                    if (scrollY > 300) {
+                        mToolbar.getBackground().setAlpha(250);
+                    }
                 } else {
                     actionBar.setTitle("歌单");
                     actionBar.setSubtitle(tag);
@@ -103,6 +128,7 @@ public class PlaylistActicity extends AppCompatActivity {
 
 
     private void initView() {
+        mImageView = (ImageView) findViewById(R.id.album_art);
         mScrollView = (ScrollView) findViewById(R.id.slv);
         ml = (LinearLayout) findViewById(R.id.LL_m);
         height = ml.getHeight();
@@ -126,8 +152,6 @@ public class PlaylistActicity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("歌单");
         desc = getIntent().getStringExtra("playlistDetail");
-
-        mToolbar.getBackground().setAlpha(100);
         mToolbar.setPadding(0, mStatusSize, 0, 0);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +162,46 @@ public class PlaylistActicity extends AppCompatActivity {
         if (!isLocalPlaylist) {
             mToolbar.setSubtitle(desc);
         }
+
+
     }
+
+    private void initColor() {
+        final Handler mhandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == ColorCaptureUtil.SUCCESS) {
+                    ArrayList<Integer> colors = (ArrayList<Integer>) msg.obj;
+                    L.e("stop");
+                    mImageView.setBackgroundColor(colors.get(colors.size() - 1));
+                    mToolbar.setBackgroundColor(colors.get(colors.size() - 1));
+                }
+            }
+        };
+        final String albumart = getIntent().getStringExtra("albumart");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    L.e("start");
+                    SystemClock.currentThreadTimeMillis();
+                    Bitmap bitmap = Glide.with(mContext)
+                            .load(albumart)
+                            .asBitmap()
+                            .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                            .get();
+                    ColorCaptureUtil utils = new ColorCaptureUtil(mhandler);
+                    utils.getBitmapColors(bitmap);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
+
 
     private void LoadData(String playlistid, final String playlistcount) {
         DownLoadData.LoadGeDanDetail(mContext, playlistid, new OkHttpUtils.OnCompleteListener<GeDanDetailBean>() {
@@ -163,9 +226,6 @@ public class PlaylistActicity extends AppCompatActivity {
                 }
                 mAdapter.update(result.getContent());
 
-//                for (SongBean sb : result.getContent()) {
-//                    ArrayList<SongBean> content = result.getContent();
-//                }
             }
 
             @Override
