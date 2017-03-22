@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.GeDanListAdapter;
 import com.example.guowang.mto.bean.GeDanDetailBean;
@@ -130,6 +131,7 @@ public class PlaylistActicity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.actionbar_back);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("歌单");
+        mToolbar.getBackground().setAlpha(100);
         mToolbar.setPadding(0, mStatusSize, 0, 0);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

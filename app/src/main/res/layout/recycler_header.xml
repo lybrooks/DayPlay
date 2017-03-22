@@ -9,6 +9,7 @@
         android:id="@+id/album_art"
         android:layout_width="match_parent"
         android:layout_height="270dp"
+        android:background="#e9dcdc"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop" />
 
@@ -66,7 +67,6 @@
 
 
         <LinearLayout
-            android:layout_below="@+id/iv_item_pic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
