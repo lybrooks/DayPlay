@@ -60,7 +60,7 @@ public class ColorCaptureUtil {
             ArrayList<Integer> result = new ArrayList<>();
             bitmap.getPixels(pixels, 0, bitmap.getWidth(), fromX, fromY, toX - fromX, toY - fromY);
             L.e("pixels.leng=" + pixels.length);
-            for (int i = 0; i < pixels.length / 12000; i++) {
+            for (int i = 0; i < pixels.length / 15000; i++) {
                 int pixel = pixels[i];
                 Integer num = colors.get(pixel);
                 if (num == null) {

@@ -41,11 +41,14 @@ import com.example.guowang.mto.bean.SongBean;
 import com.example.guowang.mto.manager.MyLinearLayoutManager;
 import com.example.guowang.mto.net.DownLoadData;
 import com.example.guowang.mto.utils.ColorCaptureUtil;
+import com.example.guowang.mto.utils.CommonUtils;
 import com.example.guowang.mto.utils.ImageUtils;
 import com.example.guowang.mto.utils.L;
 import com.example.guowang.mto.utils.OkHttpUtils;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -73,7 +76,6 @@ public class PlaylistActicity extends AppCompatActivity {
     MyLinearLayoutManager manager;
     private boolean isLocalPlaylist;
 
-    private int mStatusSize;
 
     private String albumPath, playlistName, playlistDetail;
 
@@ -103,24 +105,33 @@ public class PlaylistActicity extends AppCompatActivity {
 
     }
 
+    private int mFlexibleSpaceImageHeight;
+    private int mActionBarSize;
+    private int mStatusSize;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void setListener() {
 
         mScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY > 0) {
-                    scrool = scrollY;
+            public void onScrollChange(View v, int scrollX, final int scrollY, int oldScrollX, int oldScrollY) {
+                float a = (float) scrollY / (mFlexibleSpaceImageHeight - mActionBarSize - mStatusSize);
+                if (scrollY > 0 && scrollY < mFlexibleSpaceImageHeight - mActionBarSize - mStatusSize) {
                     actionBar.setTitle(Name);
                     actionBar.setSubtitle(desc);
-                    mToolbar.getBackground().setAlpha(100);
-                    if (scrollY > 300) {
-                        mToolbar.getBackground().setAlpha(250);
-                    }
-                } else {
+
+                }
+                if (scrollY == 0) {
                     actionBar.setTitle("歌单");
                     actionBar.setSubtitle(tag);
                 }
+
+                mToolbar.setAlpha(1f-(1f-a)+0.5f);
+
+                L.e("scrollY=" + scrollY);
+                L.e("mFlexibleSpaceImageHeight=" + mFlexibleSpaceImageHeight);
+                L.e("a="+a);
+
             }
         });
 
@@ -128,6 +139,9 @@ public class PlaylistActicity extends AppCompatActivity {
 
 
     private void initView() {
+        mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+        mActionBarSize = CommonUtils.getActionBarHeight(this);
+        mStatusSize = CommonUtils.getStatusHeight(this);
         mImageView = (ImageView) findViewById(R.id.album_art);
         mScrollView = (ScrollView) findViewById(R.id.slv);
         ml = (LinearLayout) findViewById(R.id.LL_m);
