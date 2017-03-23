@@ -58,7 +58,7 @@ import butterknife.ButterKnife;
 
 import static android.R.attr.width;
 
-public class PlaylistActicity extends AppCompatActivity {
+public class PlaylistActicity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -126,7 +126,7 @@ public class PlaylistActicity extends AppCompatActivity {
                     actionBar.setSubtitle(tag);
                 }
 
-                mToolbar.setAlpha(1f-(1f-a)+0.5f);
+                mToolbar.setAlpha(1f-(1f-a)+0.35f);
 
                 L.e("scrollY=" + scrollY);
                 L.e("mFlexibleSpaceImageHeight=" + mFlexibleSpaceImageHeight);
