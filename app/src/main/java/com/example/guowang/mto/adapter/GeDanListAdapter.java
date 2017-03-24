@@ -6,13 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guowang.mto.R;
-import com.example.guowang.mto.bean.GeDanDetailBean;
+import com.example.guowang.mto.bean.MusicInfoBean;
 import com.example.guowang.mto.bean.SongBean;
+import com.example.guowang.mto.bean.SongInfoBean;
+import com.example.guowang.mto.net.DownLoadData;
 import com.example.guowang.mto.utils.L;
+import com.example.guowang.mto.utils.MusicPlay;
+import com.example.guowang.mto.utils.OkHttpUtils;
+import com.example.guowang.mto.utils.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,18 +70,23 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    MusicPlay mMusicPlayer;
+    Player mPlayer;
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof SongViewHolder) {
             SongBean songBean = mList.get(position - 1);
-
             ((SongViewHolder) holder).tvSongName.setText(songBean.getTitle());
             ((SongViewHolder) holder).tvArtist.setText(songBean.getAuthor());
+
+
             if (!isPlaying) {
                 ((SongViewHolder) holder).tvSongNum.setText(position + "");
             } else {
                 ((SongViewHolder) holder).ivPayer.setVisibility(View.VISIBLE);
                 ((SongViewHolder) holder).tvSongNum.setVisibility(View.INVISIBLE);
+
             }
         } else if (holder instanceof CommonItemViewHolder) {
             ((CommonItemViewHolder) holder).tvAllNumber.setText("(共" + mList.size() + "首)");
@@ -115,6 +127,7 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
     class SongViewHolder extends RecyclerView.ViewHolder {
         TextView tvSongNum, tvSongName, tvArtist;
         ImageView ivPayer, ivMenu;
+        RelativeLayout mRelativeLayout;
 
         public SongViewHolder(View itemView) {
             super(itemView);
@@ -123,6 +136,26 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
             tvArtist = (TextView) itemView.findViewById(R.id.song_artist);
             ivPayer = (ImageView) itemView.findViewById(R.id.play_state);
             ivMenu = (ImageView) itemView.findViewById(R.id.popup_menu);
+            SongBean songBean = mList.get(getAdapterPosition()+1);
+            DownLoadData.LoadSongInfo(mContext, songBean.getSong_id(), new OkHttpUtils.OnCompleteListener<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    L.e("bean=" + result.toString());
+                    return;
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getmContext(), "点击播放", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }

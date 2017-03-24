@@ -25,6 +25,7 @@ import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -92,6 +93,8 @@ public class PlaylistActicity extends BaseActivity {
     private String desc;
     private int scrool;
 
+    ProgressBar mProgressBar;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +147,8 @@ public class PlaylistActicity extends BaseActivity {
         mStatusSize = CommonUtils.getStatusHeight(this);
         mImageView = (ImageView) findViewById(R.id.album_art);
         mScrollView = (ScrollView) findViewById(R.id.slv);
+        mProgressBar = (ProgressBar) findViewById(R.id.song_progress_normal);
+
         ml = (LinearLayout) findViewById(R.id.LL_m);
         height = ml.getHeight();
         mlist = new ArrayList<>();

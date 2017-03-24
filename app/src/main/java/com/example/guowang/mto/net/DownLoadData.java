@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.example.guowang.mto.bean.GeDanBean;
 import com.example.guowang.mto.bean.GeDanDetailBean;
+import com.example.guowang.mto.bean.MusicInfoBean;
+import com.example.guowang.mto.bean.SongInfoBean;
+import com.example.guowang.mto.utils.L;
 import com.example.guowang.mto.utils.OkHttpUtils;
 
 /**
@@ -37,7 +40,14 @@ public class DownLoadData {
                 .addParam("listid", listid)
                 .targetClass(GeDanDetailBean.class)
                 .execute(listener);
-
-
     }
+     //加载歌曲信息
+    public static void LoadSongInfo(Context mContext, String SongsId, OkHttpUtils.OnCompleteListener<String> listener) {
+        OkHttpUtils<String> utils = new OkHttpUtils<>(mContext);
+        utils.setRequestUrl(BMA.Song.songInfo(SongsId))
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
+
 }

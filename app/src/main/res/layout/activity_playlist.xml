@@ -22,11 +22,11 @@
             android:layout_height="wrap_content">
 
 
-            <android.support.v7.widget.RecyclerView
+            <com.example.guowang.mto.view.SongRecycle
                 android:id="@+id/rlv_music"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/LL_m"></android.support.v7.widget.RecyclerView>
+                android:layout_below="@+id/LL_m"></com.example.guowang.mto.view.SongRecycle>
 
             <LinearLayout
                 android:id="@+id/LL_m"

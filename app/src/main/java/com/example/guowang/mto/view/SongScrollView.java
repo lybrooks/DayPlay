@@ -1,6 +1,7 @@
 package com.example.guowang.mto.view;
 
 import android.content.Context;
+import android.text.method.Touch;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
@@ -28,7 +29,8 @@ public class SongScrollView extends ScrollView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return true;
+
+        return false;
     }
 
     @Override
