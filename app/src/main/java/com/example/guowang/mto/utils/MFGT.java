@@ -3,17 +3,19 @@ package com.example.guowang.mto.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.activity.MainActivity;
 import com.example.guowang.mto.activity.PlaylistActicity;
 import com.example.guowang.mto.bean.GedanInfoBean;
+import com.example.guowang.mto.service.MediaPlaySercive;
 
 
 /**
  * 实现跳转
  */
-public class MFGT {
+public class MFGT extends AppCompatActivity {
     public static void finish(Activity activity) {
         activity.finish();
         activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -49,7 +51,15 @@ public class MFGT {
         intent.putExtra("playlistname", infoBean.getTitle());
         intent.putExtra("playlistDetail", infoBean.getTag());
         intent.putExtra("playlistcount", infoBean.getListenum());
-        startActivity((Activity) mContext,intent);
+        startActivity((Activity) mContext, intent);
 
+    }
+
+    public static void startPlayer(Context mContext, String songId) {
+        Intent intrent = new Intent();
+        L.e("Intent.SongId=" + songId);
+        intrent.putExtra("song_Id", songId);
+        intrent.setClass(mContext, MediaPlaySercive.class);
+        mContext.startService(intrent);
     }
 }

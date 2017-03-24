@@ -42,10 +42,10 @@ public class DownLoadData {
                 .execute(listener);
     }
      //加载歌曲信息
-    public static void LoadSongInfo(Context mContext, String SongsId, OkHttpUtils.OnCompleteListener<String> listener) {
-        OkHttpUtils<String> utils = new OkHttpUtils<>(mContext);
+    public static void LoadSongInfo(Context mContext, Long SongsId, OkHttpUtils.OnCompleteListener<SongInfoBean> listener) {
+        OkHttpUtils<SongInfoBean> utils = new OkHttpUtils<>(mContext);
         utils.setRequestUrl(BMA.Song.songInfo(SongsId))
-                .targetClass(String.class)
+                .targetClass(SongInfoBean.class)
                 .execute(listener);
     }
 

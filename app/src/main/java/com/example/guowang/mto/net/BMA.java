@@ -191,7 +191,7 @@ public class BMA {
          * @param songid
          * @return
          */
-        public static String songInfo(String songid) {
+        public static String songInfo(Long songid) {
             StringBuffer sb = new StringBuffer(BASE);
             String str = "songid=" + songid + "&ts=" + System.currentTimeMillis();
             String e = AESTools.encrpty(str);

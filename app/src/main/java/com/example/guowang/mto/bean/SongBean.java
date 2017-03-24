@@ -46,7 +46,7 @@ public class SongBean {
     private String title;
     private String del_status;
     private String distribution;
-    private String song_id;
+    private Long song_id;
     private String author;
     private String album_id;
     private String album_title;
@@ -56,19 +56,19 @@ public class SongBean {
     private String high_rate;
     private String all_artist_id;
     private String copy_type;
-    private int has_mv;
+    private long has_mv;
     private String toneid;
     private String resource_type;
     private String is_ksong;
     private String resource_type_ext;
     private String versions;
     private String bitrate_fee;
-    private int has_mv_mobile;
+    private long has_mv_mobile;
     private String ting_uid;
-    private int is_first_publish;
-    private int havehigh;
-    private int charge;
-    private int learn;
+    private long is_first_publish;
+    private long havehigh;
+    private long charge;
+    private long learn;
     private String song_source;
     private String piao_id;
     private String korean_bb_song;
@@ -99,11 +99,11 @@ public class SongBean {
         this.distribution = distribution;
     }
 
-    public String getSong_id() {
+    public Long getSong_id() {
         return song_id;
     }
 
-    public void setSong_id(String song_id) {
+    public void setSong_id(Long song_id) {
         this.song_id = song_id;
     }
 
@@ -179,11 +179,11 @@ public class SongBean {
         this.copy_type = copy_type;
     }
 
-    public int getHas_mv() {
+    public long getHas_mv() {
         return has_mv;
     }
 
-    public void setHas_mv(int has_mv) {
+    public void setHas_mv(long has_mv) {
         this.has_mv = has_mv;
     }
 
@@ -235,11 +235,11 @@ public class SongBean {
         this.bitrate_fee = bitrate_fee;
     }
 
-    public int getHas_mv_mobile() {
+    public long getHas_mv_mobile() {
         return has_mv_mobile;
     }
 
-    public void setHas_mv_mobile(int has_mv_mobile) {
+    public void setHas_mv_mobile(long has_mv_mobile) {
         this.has_mv_mobile = has_mv_mobile;
     }
 
@@ -251,35 +251,35 @@ public class SongBean {
         this.ting_uid = ting_uid;
     }
 
-    public int getIs_first_publish() {
+    public long getIs_first_publish() {
         return is_first_publish;
     }
 
-    public void setIs_first_publish(int is_first_publish) {
+    public void setIs_first_publish(long is_first_publish) {
         this.is_first_publish = is_first_publish;
     }
 
-    public int getHavehigh() {
+    public long getHavehigh() {
         return havehigh;
     }
 
-    public void setHavehigh(int havehigh) {
+    public void setHavehigh(long havehigh) {
         this.havehigh = havehigh;
     }
 
-    public int getCharge() {
+    public long getCharge() {
         return charge;
     }
 
-    public void setCharge(int charge) {
+    public void setCharge(long charge) {
         this.charge = charge;
     }
 
-    public int getLearn() {
+    public long getLearn() {
         return learn;
     }
 
-    public void setLearn(int learn) {
+    public void setLearn(long learn) {
         this.learn = learn;
     }
 

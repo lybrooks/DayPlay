@@ -152,12 +152,12 @@ public class PlaylistActicity extends BaseActivity {
         ml = (LinearLayout) findViewById(R.id.LL_m);
         height = ml.getHeight();
         mlist = new ArrayList<>();
-        String playlistid = getIntent().getStringExtra("playlistid");
+        Long playlistid = Long.valueOf(getIntent().getStringExtra("playlistid"));
         final String playlistcount = getIntent().getStringExtra("playlistcount");
-        LoadData(playlistid, playlistcount);
+        LoadData(String.valueOf(playlistid), playlistcount);
         initToolBar();
         manager = new MyLinearLayoutManager(this);
-        mAdapter = new GeDanListAdapter(this, mlist);
+        mAdapter = new GeDanListAdapter(this,mlist,playlistid);
         mrlv.setLayoutManager(manager);
         mrlv.setAdapter(mAdapter);
 

@@ -41,4 +41,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     compile files('libs/mail.jar')
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

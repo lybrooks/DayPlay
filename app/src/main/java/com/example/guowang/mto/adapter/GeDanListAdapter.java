@@ -1,6 +1,9 @@
 package com.example.guowang.mto.adapter;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +20,16 @@ import com.example.guowang.mto.bean.SongBean;
 import com.example.guowang.mto.bean.SongInfoBean;
 import com.example.guowang.mto.net.DownLoadData;
 import com.example.guowang.mto.utils.L;
+import com.example.guowang.mto.utils.MFGT;
 import com.example.guowang.mto.utils.MusicPlay;
 import com.example.guowang.mto.utils.OkHttpUtils;
 import com.example.guowang.mto.utils.Player;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,15 +56,20 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
         this.mContext = mContext;
     }
 
-    public GeDanListAdapter(Context mContext, ArrayList<SongBean> mList) {
+    public GeDanListAdapter(Context mContext, ArrayList<SongBean> mList, Long playlistid) {
         this.mContext = mContext;
         this.mList = mList;
+        this.songIDs = getSongIds();
+        this.playlistId = playlistid;
+        player = new MediaPlayer();
     }
 
     Context mContext;
     ArrayList<SongBean> mList;
     int Type_Title = 0;
     int Type_Item = 1;
+    private long[] songIDs;
+    private long playlistId;
 
     boolean isPlaying = false;
 
@@ -70,16 +83,25 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
         }
     }
 
-    MusicPlay mMusicPlayer;
-    Player mPlayer;
+    MediaPlayer player;
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof SongViewHolder) {
-            SongBean songBean = mList.get(position - 1);
+            final SongBean songBean = mList.get(position - 1);
             ((SongViewHolder) holder).tvSongName.setText(songBean.getTitle());
             ((SongViewHolder) holder).tvArtist.setText(songBean.getAuthor());
+            ((SongViewHolder) holder).ivMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    EventBus.getDefault().post(songBean);
+                    Toast.makeText(mContext, "我是Menu", Toast.LENGTH_SHORT).show();
+//                    getmContext().startService()
+                    Long song_id = songBean.getSong_id();
+                    MFGT.startPlayer(mContext, String.valueOf(song_id));
 
+                }
+            });
 
             if (!isPlaying) {
                 ((SongViewHolder) holder).tvSongNum.setText(position + "");
@@ -104,6 +126,16 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
 
     }
 
+    public long[] getSongIds() {
+        long[] ret = new long[mList.size()];
+        for (int i = 0; i < mList.size(); i++) {
+            ret[i] = mList.get(i).getSong_id();
+
+        }
+
+        return ret;
+    }
+
     public void update(ArrayList<SongBean> content) {
         this.mList.clear();
         this.mList.addAll(content);
@@ -120,6 +152,13 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
             this.tvAllNumber = (TextView) view.findViewById(R.id.play_all_number);
             this.select = (ImageView) view.findViewById(R.id.select);
             this.layout = (RelativeLayout) view.findViewById(R.id.play_all_layout);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
     }
@@ -136,24 +175,11 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
             tvArtist = (TextView) itemView.findViewById(R.id.song_artist);
             ivPayer = (ImageView) itemView.findViewById(R.id.play_state);
             ivMenu = (ImageView) itemView.findViewById(R.id.popup_menu);
-            SongBean songBean = mList.get(getAdapterPosition()+1);
-            DownLoadData.LoadSongInfo(mContext, songBean.getSong_id(), new OkHttpUtils.OnCompleteListener<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    L.e("bean=" + result.toString());
-                    return;
-                }
-
-                @Override
-                public void onError(String error) {
-
-                }
-            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getmContext(), "点击播放", Toast.LENGTH_SHORT).show();
+
                 }
             });
 

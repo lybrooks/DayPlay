@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.guowang.mto.servive.MusicService;
 
 import java.io.IOException;
 
