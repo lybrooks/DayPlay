@@ -131,9 +131,7 @@ public class PlaylistActicity extends BaseActivity {
 
                 mToolbar.setAlpha(1f-(1f-a)+0.35f);
 
-                L.e("scrollY=" + scrollY);
-                L.e("mFlexibleSpaceImageHeight=" + mFlexibleSpaceImageHeight);
-                L.e("a="+a);
+
 
             }
         });

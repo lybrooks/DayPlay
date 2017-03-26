@@ -23,14 +23,6 @@
         <activity android:name=".activity.BaseActivity" />
 
         <service
-            android:name=".servive.MusicService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name="com.wm.remusic.service.MediaService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
             android:name=".service.MediaPlaySercive"
             android:enabled="true"
             android:exported="true"></service>

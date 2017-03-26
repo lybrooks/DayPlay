@@ -59,25 +59,20 @@ public class ColorCaptureUtil {
             TreeMap<Integer, Integer> sortedColors = new TreeMap<>();
             ArrayList<Integer> result = new ArrayList<>();
             bitmap.getPixels(pixels, 0, bitmap.getWidth(), fromX, fromY, toX - fromX, toY - fromY);
-            L.e("pixels.leng=" + pixels.length);
             for (int i = 0; i < pixels.length / 15000; i++) {
                 int pixel = pixels[i];
                 Integer num = colors.get(pixel);
                 if (num == null) {
                     colors.put(pixel, 1);
-                    L.e("color1:" + pixel);
                 } else {
                     num += 1;
                     colors.put(pixel, num);
-                    L.e("color2:" + pixel);
                 }
             }
             for (Map.Entry<Integer, Integer> entry : colors.entrySet()) {
-                L.e("colors.entrySet()=" + colors.entrySet().size());
                 sortedColors.put(entry.getValue(), entry.getKey());
             }
             for (Map.Entry<Integer, Integer> entry : sortedColors.entrySet()) {
-                L.e("sortedColors.entrySet()=" + sortedColors.entrySet().size());
                 result.add(entry.getValue());
                 Log.d(TAG, "run: color:" + entry.getValue() + ",count:" + entry.getKey());
             }

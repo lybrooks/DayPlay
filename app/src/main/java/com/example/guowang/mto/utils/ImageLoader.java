@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.guowang.mto.R;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -21,7 +19,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-
+/**
+ * Created by yao on 2016/5/18.
+ */
 public class ImageLoader {
     private static final String UTF_8 = "utf-8";
     private static final int DOWNLOAD_SUCCESS = 0;
@@ -48,6 +48,10 @@ public class ImageLoader {
      * ListView、RecyclerView是否在拖拽中，true：拖拽中
      */
     boolean mIsDragging;
+
+    public static void downloadImg(Context context, ImageView iv, String imgUrl, boolean b) {
+        setImage(imgUrl, context, iv, b);
+    }
 
     public interface OnImageLoadListener {
         void onSuccess(String url, Bitmap bitmap);
@@ -262,7 +266,7 @@ public class ImageLoader {
      */
     public ImageLoader listener(final ViewGroup parent) {
         if (parent != null) {
-            mBean.listener = new ImageLoader.OnImageLoadListener() {//设置下载完成后处理的代码
+            mBean.listener = new OnImageLoadListener() {//设置下载完成后处理的代码
                 @Override
                 public void onSuccess(String url, Bitmap bitmap) {
                     //从RecyclerView中搜索tag值是url的ImageView
@@ -360,19 +364,33 @@ public class ImageLoader {
         }
     }
 
-    public static void downloadImg(Context context, ImageView imageView, String thumb) {
-        setImage(thumb, context, imageView, true);
-    }
-
 
 
     public static void setImage(String url, Context context, ImageView imageView, boolean isDragging) {
         ImageLoader.build(url)
-                .defaultPicture(R.drawable.actionbar_music_prs)
+//                .defaultPicture(R.drawable.nopic)
                 .imageView(imageView)
                 .setDragging(isDragging)
                 .showImage(context);
     }
-
-
+    /**http://101.251.196.90:8000/FuLiCenterServerV2.0/
+     * downloadAvatar?name_or_hxid=a952702&avatarType=user_avatar&m_avatar_suffix=.jpg&width=200&height=200*/
+//    public static String getAvatarUrl(User user) {
+//        if (user != null) {
+//            String url = I.DOWNLOAD_AVATAR_URL + I.NAME_OR_HXID + "=" + user.getMuserName()
+//                    + I.AND + I.AVATAR_TYPE + "=user_avatar"  + I.AND + I.AVATAR_SUFFIX
+//                    +"="+user.getMavatarSuffix()+I.AND+"width=40&height=40"
+//                    ;
+//            L.e("useravatar="+url);
+//            return url;
+//        }
+//        return null;
+//    }
+//
+//    public static void setAvatar(String url, Context context, ImageView imageView) {
+//        ImageLoader.build(url)
+//                .defaultPicture(R.drawable.contactlogo)
+//                .imageView(imageView)
+//                .showImage(context);
+//    }
 }

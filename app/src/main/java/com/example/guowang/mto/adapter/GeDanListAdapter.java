@@ -91,15 +91,16 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
             final SongBean songBean = mList.get(position - 1);
             ((SongViewHolder) holder).tvSongName.setText(songBean.getTitle());
             ((SongViewHolder) holder).tvArtist.setText(songBean.getAuthor());
-            ((SongViewHolder) holder).ivMenu.setOnClickListener(new View.OnClickListener() {
+
+            ((SongViewHolder) holder).mRelativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    EventBus.getDefault().post(songBean);
-                    Toast.makeText(mContext, "我是Menu", Toast.LENGTH_SHORT).show();
+                    EventBus.getDefault().post(songBean);
+//                    Toast.makeText(mContext, "我是Menu", Toast.LENGTH_SHORT).show();
 //                    getmContext().startService()
+                    //实现音乐的播放
                     Long song_id = songBean.getSong_id();
                     MFGT.startPlayer(mContext, String.valueOf(song_id));
-
                 }
             });
 
@@ -175,13 +176,8 @@ public class GeDanListAdapter extends RecyclerView.Adapter {
             tvArtist = (TextView) itemView.findViewById(R.id.song_artist);
             ivPayer = (ImageView) itemView.findViewById(R.id.play_state);
             ivMenu = (ImageView) itemView.findViewById(R.id.popup_menu);
+            mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.RL_item);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
 
         }
     }

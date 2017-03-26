@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+
 import com.example.guowang.mto.R;
 import com.example.guowang.mto.adapter.MenuAdapter;
 import com.example.guowang.mto.adapter.mViewPagerAdapter;
@@ -28,7 +29,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.rlv_menu)
     RecyclerView mRlvMenu;
@@ -74,7 +75,6 @@ public class MainActivity extends BaseActivity{
                 new MenuInfoBean(R.mipmap.topmenu_icn_exit, "退出")};
         for (MenuInfoBean bean : beans) {
             MenuInfoList.add(bean);
-            Log.e("main", "" + bean.toString());
         }
         mContext = this;
 //        mDwaermenu.setScrimColor(Color.TRANSPARENT);
@@ -88,10 +88,8 @@ public class MainActivity extends BaseActivity{
         fragmentArrayList.add(mainFragment);
         fragmentArrayList.add(localFragment);
         fragmentManager = getSupportFragmentManager();
-        mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList,null);
+        mViewPagerAdapter VP_Adapter = new mViewPagerAdapter(fragmentManager, fragmentArrayList, null);
         vp_main.setAdapter(VP_Adapter);
-
-
 
 
     }

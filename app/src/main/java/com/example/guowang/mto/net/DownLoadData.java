@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.guowang.mto.bean.GeDanBean;
 import com.example.guowang.mto.bean.GeDanDetailBean;
+import com.example.guowang.mto.bean.LoopImgBean;
 import com.example.guowang.mto.bean.MusicInfoBean;
 import com.example.guowang.mto.bean.SongInfoBean;
 import com.example.guowang.mto.utils.L;
@@ -41,11 +42,20 @@ public class DownLoadData {
                 .targetClass(GeDanDetailBean.class)
                 .execute(listener);
     }
-     //加载歌曲信息
+
+    //加载歌曲信息
     public static void LoadSongInfo(Context mContext, Long SongsId, OkHttpUtils.OnCompleteListener<SongInfoBean> listener) {
         OkHttpUtils<SongInfoBean> utils = new OkHttpUtils<>(mContext);
         utils.setRequestUrl(BMA.Song.songInfo(SongsId))
                 .targetClass(SongInfoBean.class)
+                .execute(listener);
+    }
+
+    //下载图片轮播信息
+    public static void LoadLoopImg(Context mContext, int num, OkHttpUtils.OnCompleteListener<LoopImgBean> listener) {
+        OkHttpUtils<LoopImgBean> utils = new OkHttpUtils<>(mContext);
+        utils.setRequestUrl(BMA.focusPic(num))
+                .targetClass(LoopImgBean.class)
                 .execute(listener);
     }
 
