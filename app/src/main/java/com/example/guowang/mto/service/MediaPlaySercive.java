@@ -74,7 +74,6 @@ public class MediaPlaySercive extends Service {
                     String mPath = "aaa";
                     if (!mPath.equals(path)) {
                         mPath = path;
-                        Log.d("test", path);
                         while (true) {
                             if (player == null) {
                                 player = new MediaPlayer();

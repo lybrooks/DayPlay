@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RL_item"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:id="@+id/RL_item"
-    >
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/play_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:layout_marginLeft="20dp"
+        android:focusable="false"
         android:gravity="center"
         android:scaleType="centerInside"
         android:src="@drawable/song_play_icon"
-        android:visibility="gone"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_item_Ge_num"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:maxLength="3"
         android:layout_centerVertical="true"
-        android:text="1"
-        android:textSize="15sp"
-        android:textColor="#cec5c5"
+        android:layout_gravity="center"
         android:layout_marginLeft="20dp"
+        android:maxLength="3"
+        android:text="1"
+        android:textColor="#cec5c5"
+        android:textSize="15sp"
 
         />
 
     <LinearLayout
-        android:layout_marginLeft="25dp"
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tv_item_Ge_num"
         android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/tv_item_Ge_num"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_title_songname"
@@ -69,13 +69,10 @@
         android:id="@+id/popup_menu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:focusable="false"
         android:padding="15dp"
-        android:src="@drawable/list_icn_more"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-
-     />
+        android:src="@drawable/list_icn_more" />
 </RelativeLayout>

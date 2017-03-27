@@ -6,9 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.example.guowang.mto.R;
-
 
 public class FlowIndicator extends View {
 
